@@ -104,3 +104,10 @@ input:focus,textarea:focus,button:focus-visible,summary:focus-visible,.opt:focus
   .steps li span{display:none}
   .btn-row:not(.nav) .btn{flex:1}
 }
+
+/* 제출 뒤 다른 사람들의 생각 */
+.views{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.views h3{margin:0 0 4px;font-size:1.1rem}
+.view-item{margin:10px 0 0;padding:8px 14px;background:var(--page);border-left:3px solid var(--line);border-radius:0 4px 4px 0}
+.view-item b{display:block;font:700 16px "Noto Sans KR",sans-serif;color:var(--teal-deep)}
+.view-item p{margin:2px 0 0}

@@ -311,6 +311,20 @@ function renderFinal() {
   $("submitBtn").textContent = S.submitted ? "제출 완료" : "제출";
 }
 
+/* 제출 성공 뒤에만 연다: 쓰기 전에 보면 생각이 쏠린다 */
+function renderViews() {
+  const box = $("views"); box.innerHTML = "";
+  box.appendChild(el("h3", "", "다른 사람들은 이렇게 생각해"));
+  box.appendChild(el("p", "note", "정리해 본 생각이야. 어느 쪽이 맞다는 건 아니야. 내 생각과 비슷한 점, 다른 점을 한 가지 찾아서 친구와 이야기해 보자."));
+  OTHER_VIEWS.forEach(v => {
+    const item = el("div", "view-item");
+    item.appendChild(el("b", "", v.head));
+    item.appendChild(el("p", "", v.t));
+    box.appendChild(item);
+  });
+  box.hidden = false;
+}
+
 function goWrap() {
   const err = checkParts();
   if (err) { $("s4Err").textContent = err; return; }
@@ -355,6 +369,7 @@ async function submitEssay() {
   if (window.DraftGuard) DraftGuard.clear(); // 저장 성공 → 임시저장 삭제
   $("submitBtn").textContent = "제출 완료";
   $("outMsg").textContent = S.preview ? "미리보기라 저장하지 않았어." : "제출했어! 수고했어.";
+  renderViews();
 }
 
 async function copyOut() {
