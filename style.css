@@ -1,0 +1,106 @@
+/* 색: 1832년 영국 개혁과 차티스트 운동 — 산업 도시의 석탄빛 잉크와 청록 회색(교과서 사실 칸), 황토·녹슨 철색(내 의견·선택 표시),
+   바랜 신문지 바탕. "교과서=청록 칸, 내 생각=흰 칸+황토 줄"로 한눈에 갈리게 했다. 다른 차시 배색(역할 일기의 남색·꼭두서니·놋쇠)과 겹치지 않게 새로 짰다. */
+:root{
+  --paper:#efede6;--page:#fbfaf6;--ink:#242d2c;--muted:#59615f;--line:#d6d2c4;
+  --teal:#2a5865;--teal-deep:#1d424d;--teal-wash:#e2eeef;
+  --ochre:#a2622f;--ochre-wash:#f6e8da;--sage-wash:#e8ede4;--sage-ink:#46573d
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:17px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Serif KR","Nanum Myeongjo",serif;line-height:1.75}
+.page{max-width:760px;margin:0 auto;padding:12px 16px 72px}
+.preview-bar{background:var(--ochre);color:#fff;text-align:center;padding:6px;font:16px "Noto Sans KR",sans-serif}
+
+/* 머리 */
+.book-head{padding:14px 0 6px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.eyebrow{color:var(--ochre);font:700 16px "Noto Sans KR",sans-serif;letter-spacing:.02em}
+h1{font-size:1.6rem;line-height:1.35;margin:2px 0 12px}
+h2{font-size:1.25rem;margin:0 0 8px;line-height:1.4}
+.steps{list-style:none;display:flex;gap:4px;margin:0 0 10px;padding:0;font-family:"Noto Sans KR",sans-serif}
+.steps li{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:7px 2px;border-bottom:3px solid var(--line);color:var(--muted);font-size:16px}
+.steps li span{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);font-size:16px;flex:none}
+.steps li.on{border-color:var(--ochre);color:var(--ochre);font-weight:700}
+.steps li.on span{background:var(--ochre);border-color:var(--ochre);color:#fff}
+.steps li.done{border-color:var(--teal);color:var(--teal)}
+.steps li.done span{background:var(--teal);border-color:var(--teal);color:#fff}
+
+/* 카드 */
+.card{background:var(--page);border:1px solid var(--line);border-radius:5px;padding:18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(30,30,10,.07)}
+.note{color:var(--muted);margin:0 0 10px}
+label{display:block;margin:12px 0 4px;font:700 16px "Noto Sans KR",sans-serif}
+input,textarea{width:100%;font:inherit;font-size:17px;padding:12px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
+textarea{resize:vertical;line-height:1.7}
+input:focus,textarea:focus,button:focus-visible,summary:focus-visible,.opt:focus-visible{outline:3px solid #b3cdd2;outline-offset:1px;border-color:var(--teal)}
+
+/* 버튼 */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:10px 22px;font:700 17px "Noto Sans KR",sans-serif;color:#fff;background:var(--teal);border:1px solid var(--teal);border-radius:5px;cursor:pointer;text-decoration:none;margin-top:10px}
+.btn.ghost{background:var(--page);color:var(--teal)}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.nav{flex-wrap:nowrap}
+.nav .btn.ghost{flex:0 0 36%}
+.nav .btn:not(.ghost){flex:1}
+.err{color:var(--ochre);font:700 16px "Noto Sans KR",sans-serif;min-height:1.2em;margin:6px 0 0}
+
+/* 지난번 내 글 */
+.before-text{margin:6px 0 4px;padding:12px 16px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--ochre);border-radius:0 4px 4px 0;white-space:pre-wrap}
+.before-fold{margin:0 0 14px;padding:2px 14px;background:var(--page);border:1px solid var(--line);border-radius:5px}
+.before-fold summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font:700 16px "Noto Sans KR",sans-serif;color:var(--ochre)}
+
+/* 입장·이유 고르기 */
+.group{border:0;padding:0;margin:14px 0 0;min-width:0}
+.group legend{padding:0;margin-bottom:6px;font:700 16px "Noto Sans KR",sans-serif;color:var(--teal-deep)}
+.legend-sub{font-weight:400;color:var(--muted)}
+.opt-list{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;border:1px solid var(--line);border-radius:5px;background:#fff;cursor:pointer;min-height:52px}
+.opt-mark{flex:none;width:24px;height:24px;margin-top:3px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;color:#fff;font:700 16px "Noto Sans KR",sans-serif}
+.opt[role="radio"] .opt-mark{border-radius:50%}
+.opt[role="checkbox"] .opt-mark{border-radius:3px}
+.opt-text{margin:0;flex:1}
+.ai-chip{display:inline-block;margin-left:8px;padding:0 8px;font:700 16px "Noto Sans KR",sans-serif;color:var(--teal);background:var(--teal-wash);border:1px solid var(--teal);border-radius:3px;white-space:nowrap}
+.opt[aria-checked="true"]{border-color:var(--ochre);background:var(--ochre-wash)}
+.opt[aria-checked="true"] .opt-mark{background:var(--ochre);border-color:var(--ochre)}
+.opt[aria-checked="true"] .opt-mark::after{content:"✓"}
+.opt[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+
+/* 교과서 사실 칸(청록) — 내 의견 칸과 갈라 보이게 */
+.book{background:var(--teal-wash);border-color:#b7cfd3;border-top:4px solid var(--teal)}
+.book-label{font:700 16px "Noto Sans KR",sans-serif;color:var(--teal);letter-spacing:.06em;margin-bottom:6px}
+.fact-group{margin-top:14px}
+.fact-group h3{margin:0 0 6px;font:700 16px "Noto Sans KR",sans-serif;color:var(--teal-deep)}
+.fact-group .opt-list{gap:8px}
+.book .opt{background:var(--page)}
+.pg{color:var(--muted);font:16px "Noto Sans KR",sans-serif;white-space:nowrap}
+.mine-tag{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:12px;padding:8px 14px;background:var(--ochre-wash);border-left:4px solid var(--ochre);border-radius:0 4px 4px 0;font:16px/1.6 "Noto Sans KR",sans-serif}
+.mine-tag b{color:var(--ochre)}
+.recap-fact{margin:6px 0 0;padding:8px 12px;background:var(--page);border-left:3px solid var(--teal);border-radius:0 4px 4px 0}
+
+/* 쓰기 */
+.frame-note{position:sticky;top:0;z-index:5;margin:0 -16px 14px;padding:8px 16px;background:var(--teal-deep);color:#e6f0f1;font:16px/1.5 "Noto Sans KR",sans-serif;box-shadow:0 2px 4px rgba(20,25,30,.15)}
+.frame-note p{margin:2px 0}
+.frame-note p:last-child{color:#f2cfae;font-weight:700}
+.part.mine{border-top:4px solid var(--ochre)}
+.part.factpart{background:var(--teal-wash);border-color:#b7cfd3;border-top:4px solid var(--teal)}
+.part-label{margin-top:0;font-size:17px;color:var(--teal-deep)}
+.part.mine .part-label{color:var(--ochre)}
+.part-guide{margin:0 0 8px;color:var(--muted);font:16px "Noto Sans KR",sans-serif}
+.hint{margin:0 0 10px;padding:2px 14px;background:var(--sage-wash);border-radius:4px}
+.hint summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font:700 16px "Noto Sans KR",sans-serif;color:var(--sage-ink)}
+.hint p{margin:2px 0 10px}
+.count{color:var(--muted);font:16px "Noto Sans KR",sans-serif;text-align:right;margin-top:4px}
+
+/* 마무리 */
+.final{background:#fff;border:1px solid var(--line);border-radius:4px;padding:14px 18px 4px}
+.final .f-head{font-weight:700;color:var(--ochre);margin:0 0 4px}
+.final .f-sub{color:var(--muted);font-size:16px;margin:0 0 10px}
+.final .f-book{margin:0 0 12px;padding:8px 12px;background:var(--teal-wash);border-left:3px solid var(--teal);border-radius:0 4px 4px 0}
+.final .f-book .book-label{margin:0 0 2px}
+.final .f-mine{margin:0 0 14px;padding-left:12px;border-left:3px solid var(--ochre);white-space:pre-wrap}
+
+@media (max-width:560px){
+  .steps li{font-size:16px;padding:6px 0;gap:0}
+  .steps li span{display:none}
+  .btn-row:not(.nav) .btn{flex:1}
+}

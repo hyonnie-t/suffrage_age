@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>학생 참정권, 내 의견 다시 쓰기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="previewBar" class="preview-bar" hidden>미리보기 모드 — 저장되지 않아</div>
+<main class="page">
+  <header class="book-head">
+    <div class="eyebrow">세계사 주제30 · 교과서 153쪽</div>
+    <h1>선거 나이, 다시 생각해 보기</h1>
+    <ol id="steps" class="steps" aria-label="진행 단계" hidden>
+      <li data-k="before"><span>1</span>내 글</li>
+      <li data-k="stance"><span>2</span>내 입장</li>
+      <li data-k="fact"><span>3</span>교과서</li>
+      <li data-k="write"><span>4</span>쓰기</li>
+      <li data-k="wrap"><span>5</span>마무리</li>
+    </ol>
+  </header>
+
+  <!-- 시작 -->
+  <section id="s0" class="screen">
+    <div class="card">
+      <h2>시작하기</h2>
+      <p class="note">지난번에 쓴 "선거할 수 있는 나이(만 18세)를 바꿀 필요가 있을까?"를 다시 보고, 교과서 사실을 읽은 뒤 내 의견을 다시 써 볼 거야.</p>
+      <label for="sid">학번 (5자리, 예: 20512)</label>
+      <input id="sid" inputmode="numeric" maxlength="5" autocomplete="off">
+      <label for="sname">이름</label>
+      <input id="sname" autocomplete="off">
+      <p id="startErr" class="err" role="alert"></p>
+      <button id="startBtn" class="btn wide">시작</button>
+    </div>
+  </section>
+
+  <!-- 1. 지난번 내 글 -->
+  <section id="s1" class="screen" hidden>
+    <div class="card">
+      <h2>지난번에 쓴 내 글</h2>
+      <p id="beforeNote" class="note"></p>
+      <blockquote id="beforeText" class="before-text" hidden></blockquote>
+      <div id="beforeBtns" class="btn-row" hidden>
+        <button id="retryBtn" class="btn ghost">다시 불러오기</button>
+        <button id="freshBtn" class="btn ghost">그냥 새로 쓸래</button>
+      </div>
+    </div>
+    <div class="btn-row nav">
+      <button id="s1Next" class="btn">다음</button>
+    </div>
+  </section>
+
+  <!-- 2. 내 입장 확인 -->
+  <section id="s2" class="screen" hidden>
+    <div class="card">
+      <h2 id="stanceTitle">내 입장 고르기</h2>
+      <p id="stanceNote" class="note"></p>
+      <fieldset class="group">
+        <legend>선거 나이에 대한 내 입장</legend>
+        <div id="stanceList" class="opt-list" role="radiogroup" aria-label="내 입장"></div>
+      </fieldset>
+      <fieldset class="group">
+        <legend>그렇게 생각한 이유 <span class="legend-sub">(최대 3개)</span></legend>
+        <div id="reasonList" class="opt-list" aria-label="이유"></div>
+      </fieldset>
+    </div>
+    <div class="btn-row nav">
+      <button id="s2Back" class="btn ghost">이전</button>
+      <button id="s2Next" class="btn">다음</button>
+    </div>
+    <p id="s2Err" class="err" role="alert"></p>
+  </section>
+
+  <!-- 3. 교과서 사실 고르기 -->
+  <section id="s3" class="screen" hidden>
+    <div id="s3Mine" class="mine-tag"></div>
+    <div class="card book">
+      <div class="book-label">교과서 사실 · 153쪽</div>
+      <h2>글에 쓸 교과서 사실 고르기</h2>
+      <p class="note">교과서에는 학생이나 청소년의 선거권 이야기는 없어. 대신 누가 선거권을 얻었고, 누가 요구했는지가 나와. 그중에서 내 생각을 쓸 때 도움이 될 사실을 1~2개 골라.</p>
+      <div id="factBox"></div>
+    </div>
+    <div class="btn-row nav">
+      <button id="s3Back" class="btn ghost">이전</button>
+      <button id="s3Next" class="btn">다음</button>
+    </div>
+    <p id="s3Err" class="err" role="alert"></p>
+  </section>
+
+  <!-- 4. 쓰기 -->
+  <section id="s4" class="screen" hidden>
+    <div id="frameNote" class="frame-note" role="note"></div>
+    <div id="s4Mine" class="mine-tag"></div>
+    <div class="card book recap">
+      <div class="book-label">교과서 사실 · 내가 고른 것</div>
+      <div id="s4Facts"></div>
+    </div>
+    <details id="s4Before" class="before-fold" hidden>
+      <summary>지난번에 쓴 내 글 다시 보기</summary>
+      <blockquote id="s4BeforeText" class="before-text"></blockquote>
+    </details>
+    <div id="partBox"></div>
+    <div class="btn-row nav">
+      <button id="s4Back" class="btn ghost">이전</button>
+      <button id="s4Next" class="btn">다음</button>
+    </div>
+    <p id="s4Err" class="err" role="alert"></p>
+  </section>
+
+  <!-- 5. 마무리 -->
+  <section id="s5" class="screen" hidden>
+    <div class="card">
+      <h2>내 의견 한 편</h2>
+      <p class="note">다시 읽어 보고, 고칠 게 있으면 이전으로 돌아가서 고쳐.</p>
+      <div id="final" class="final"></div>
+      <p id="s5Err" class="err" role="alert"></p>
+      <div class="btn-row">
+        <button id="submitBtn" class="btn">제출</button>
+        <button id="copyBtn" class="btn ghost">글 복사</button>
+      </div>
+      <p id="outMsg" class="note" role="status"></p>
+    </div>
+    <div class="btn-row nav">
+      <button id="s5Back" class="btn ghost">이전</button>
+    </div>
+  </section>
+</main>
+<script src="focus_guard.js"></script>
+<script src="glossary.js"></script>
+<script src="draft_guard.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
