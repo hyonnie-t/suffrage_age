@@ -13,7 +13,7 @@ const S = {
   priorState: "idle",     // idle | loading | ok | fail
   stance: "", reasons: [], facts: [],
   stanceTouched: false, reasonsTouched: false,
-  sending: false, submitted: false
+  sending: false, submitted: false, padletUrl: ""
 };
 
 /* 화면 목록: stage는 위쪽 5단계 막대 */
@@ -102,6 +102,33 @@ function initPicks() {
   S.reasons = hasPrior() ? S.prior.aiReasons.slice() : [];
 }
 
+/* 패들렛 링크는 백엔드 학년정보(포트폴리오)에서 가져온다. 반 정보가 든 링크라 레포에 적지 않는다. */
+function ensureUrlScheme(u) {
+  u = String(u || "").trim();
+  return u && !/^https?:\/\//i.test(u) ? "https://" + u : u;
+}
+
+async function loadPadletUrl(grade, ban) {
+  try {
+    const res = await fetch(CONFIG.SHEET_WEBAPP_URL + "?mode=curriculum");
+    const json = await res.json();
+    const pf = json && json.grades && json.grades[String(grade)] && json.grades[String(grade)].portfolio;
+    if (!pf) return "";
+    return ensureUrlScheme(pf.urlByBan ? (pf.urlByBan[ban] || pf.urlByBan[String(ban)] || "") : (pf.url || ""));
+  } catch (e) {
+    return "";
+  }
+}
+
+function renderPadlet() {
+  const a = $("padletBtn");
+  if (S.padletUrl) {
+    a.href = S.padletUrl; a.hidden = false; $("padletMsg").textContent = "";
+  } else {
+    a.hidden = true; $("padletMsg").textContent = "패들렛 링크는 선생님이 알려 준 곳을 써 줘.";
+  }
+}
+
 /* ── 시작 ── */
 function startApp() {
   const sid = $("sid").value.trim();
@@ -113,6 +140,7 @@ function startApp() {
   S.sid = sid; S.name = name; S.ban = p.ban;
   FocusGuard.start({ key: CONFIG.GAME_NAME + ":" + sid }); // 작성 중 화면 이탈·붙여넣기 기록 (history26 snippets/focus_guard.js)
   if (window.DraftGuard) DraftGuard.start({ key: CONFIG.GAME_NAME, sid: sid }); // 글쓰기 칸 임시저장 (history26 v75)
+  loadPadletUrl(Number(sid[0]), p.ban).then(u => { S.padletUrl = u; renderPadlet(); });
   show("s1");
   loadPrior();
 }
